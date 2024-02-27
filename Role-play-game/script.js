@@ -41,14 +41,17 @@ const weapons = [
 const monsters = [
     {
         name: "slime",
+        level: 3,
         health: 30
     },
     {
         name: "goblin",
+        level: 8,
         health: 80
     },
     {
         name: "dragon",
+        level: 20,
         health: 250
     }
 ]
@@ -69,8 +72,8 @@ const locations = [
     },
     {
         name: "cave",
-        "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
-        "button functions": [fightSlime, fightBeast, goTown],
+        "button text": ["Fight slime", "Fight goblin beast", "Go to town square"],
+        "button functions": [fightSlime, fightGoblin, goTown],
         text: "You enter the cave. You see some monsters."
     },
     {
@@ -111,28 +114,28 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 // function to update the player stats and game text when the player moves to a new location in the game.
-function updateStats() {
+function update(location) {
     monsterStats.style.display = "none"; // hide monster stats
-    button1.innerText = locations["button text"][0]; // set button 1 text
-    button2.innerText = locations["button text"][1]; // set button 2 text
-    button3.innerText = locations["button text"][2]; // set button 3 text
-    button1.onclick = locations["button functions"][0]; // set button 1 function
-    button2.onclick = locations["button functions"][1]; // set button 2 function
-    button3.onclick = locations["button functions"][2]; // set button 3 function
-    text.innerHTML = locations.text; // set game text
+    button1.innerText = location["button text"][0]; // set button 1 text
+    button2.innerText = location["button text"][1]; // set button 2 text
+    button3.innerText = location["button text"][2]; // set button 3 text
+    button1.onclick = location["button functions"][0]; // set button 1 function
+    button2.onclick = location["button functions"][1]; // set button 2 function
+    button3.onclick = location["button functions"][2]; // set button 3 function
+    text.innerHTML = location.text; // set game text
 }
 
 // function to start the game
 function goTown() {
-    updateStats(locations[0]); // update player stats and game text
+    update(locations[0]); // update player stats and game text
 }
 
 function goStore() {
-    updateStats(locations[1]); // update player stats and game text
+    update(locations[1]); // update player stats and game text
 }
 
 function goCave() {
-    updateStats(locations[2]); // update player stats and game text
+    update(locations[2]); // update player stats and game text
 }
 
 // function to buy health at the store
@@ -149,7 +152,7 @@ function buyHealth() {
 
 // function to buy a weapon at the store
 function buyWeapon() {
-    if (currentWeapon < weapons.length -1) { // if player doesn't have the best weapon
+    if (currentWeapon < weapons.length - 1) { // if player doesn't have the best weapon
         if (gold >= 30) { // if player has enough gold
             gold -= 30; // subtract gold
             currentWeapon++; // add weapon
@@ -166,7 +169,7 @@ function buyWeapon() {
     else {
         text.innerText = "You already have the best weapon."; // if player already has the best weapon
         button2.innerText = "Sell current weapon for 20 gold."; // change button 2 text to sell current weapon
-        button2.onclick = sellWeapon; // change button 2 function to sell current weapon
+        button2.onclick = sellWeapon(); // change button 2 function to sell current weapon
     }
 }
 
@@ -191,7 +194,7 @@ function fightSlime() {
 }
 
 // function to fight the fanged beast in the cave
-function fightBeast() {
+function fightGoblin() {
     fighting = 1;
     goFight();
 }
@@ -204,7 +207,7 @@ function fightDragon() {
 
 // function to start the fight
 function goFight() {
-    updateStats(locations[3]); // update player stats and game text
+    update(locations[3]); // update player stats and game text
     monsterHealth = monsters[fighting].health; // get monster health
     monsterStats.style.display = "block"; // show monster stats
     monsterName.innerText = monsters[fighting].name; // set monster name
@@ -264,17 +267,17 @@ function winFight() {
     xp = monsters[fighting].level; // add experience points
     goldText.innerText = gold; // update gold text
     xpText.innerText = xp; // update experience points text
-    updateStats(locations[4]); // update player stats and game text
+    update(locations[4]); // update player stats and game text
 }
 
 // function to restart the game
 function loseFight() {
-    updateStats(locations[5]); // update player stats and game text
+    update(locations[5]); // update player stats and game text
 }
 
 // function to restart the game
 function killMonster() {
-    updateStats(locations[6]); // update player stats and game text
+    update(locations[6]); // update player stats and game text
 }
 
 // function to restart the game

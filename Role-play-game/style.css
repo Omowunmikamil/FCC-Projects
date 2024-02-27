@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: 'helvetica', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background:
+      radial-gradient(black 15%, transparent 16%) 0 0,
+      radial-gradient(black 15%, transparent 16%) 8px 8px,
+      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color: #0a0a23;
+    background-size: 16px 16px;
+    background-attachment: fixed;
+}
+#game {
+    max-width: 400px;
+    max-height: 500px;
+    background-color: #fff;
+    color: #fff;
+    border-radius: 10px;
+    margin: 30px auto 0;
+    padding: 10px;
+}
+h1 {
+    color: #ffffff;
+    font-size: 3rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+}
+#stats, #controls {
+    border: 1px solid #0a0a23;
+    padding: 5px;
+    color: #0a0a23;
+    display: flex;
+}
+#monsterStats {
+    display: none;
+    border: 1px solid #0a0a23;
+    padding: 5px;
+    color: #fff;
+    background: #c70d0d;
+}
+#text {
+    color: #fff;
+    background-color: #0a0a23;
+    padding: 10px;
+}
+.stat {
+    padding-right: 10px;
+}
+button {
+    color: #0a0a23;
+    background-color: #f4e242;
+    margin-left: 5px;
+    background-image: linear-gradient(315deg, #eaf030 0%, #f4e242 74%);
+    border: 4px solid #f4e242;
+}
